@@ -1,0 +1,64 @@
+@startuml
+entity User {
+  +**enrollment : TEXT <<PK>>**
+  --
+  +*role : TEX
+  + password : TEXT
+  +*name : TEXT
+  +*created_at: DATE 
+  +*updated_at: DATE
+}
+
+entity Reservation {
+  + **id : TEXT <<PK>>**
+  --
+  +**laboratory_id:TEXT <<FK>>**
+  +**user_id: TEXT <<FK>>**
+  +*init_date : DATE
+  +*end_date : DATE
+  +*created_at: DATE 
+  +*updated_at: DATE
+}
+
+entity Laboratory {
+  + **id : TEXT <<PK>>**
+  --
+  +*capacity : INT
+  +*unit : INT
+  + machines : INT
+  +*isAvailable : BOOL
+  +*number : INT
+  +*floor: INT
+  +*created_at: DATE 
+  +*updated_at: DATE
+ 
+}
+
+entity Material_Reservation {
+  + **id : TEXT <<PK>>**
+  --
+  +***reservation_id: TEXT <<FK>>**
+  +***material_id: TEXT <<FK>>**
+  +*returned:BOOL
+  +*created_at: DATE 
+  +*updated_at: DATE
+
+}
+
+entity Material {
+  + id : TEXT <<PK>>
+  --
+  +*name : TEXT
+  + description : TEXT
+  + category : TEXT
+  +*quantity : INT
+  +*created_at: DATE 
+  +*updated_at: DATE
+ 
+}
+
+User ||..o{ Reservation 
+Reservation }o..o| Laboratory 
+Reservation ||--o{ Material_Reservation
+Material_Reservation}o--|| Material
+@enduml
