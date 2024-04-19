@@ -10,4 +10,8 @@ export class UserRepository {
       data,
     });
   }
+
+  public async find(enrollment: string): Promise<User> {
+    return await this.prisma.user.findUniqueOrThrow({ where: { enrollment } });
+  }
 }
