@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { FindUserService } from '../user/core/use-cases/find/find-user.service';
-import { signInRequestDto } from './application/dto/sign-in-request.dto';
-import { IJwtPayload } from './application/interface/jwt-payload.interface';
+import { FindUserService } from '../../../user/core/use-cases/find/find-user.service';
+import { signInRequestDto } from '../../application/dto/sign-in-request.dto';
+import { IJwtPayload } from '../../application/interface/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
