@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `User` (
     `enrollment` VARCHAR(191) NOT NULL,
-    `role` ENUM('ADM', 'USER') NOT NULL DEFAULT 'USER',
+    `role` ENUM('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
     `password` VARCHAR(191) NULL,
     `name` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
