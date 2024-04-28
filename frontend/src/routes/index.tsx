@@ -1,4 +1,6 @@
 import { App } from "App";
+import { HomePage } from "pages/Home";
+import { LoginPage } from "pages/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RoutesEnum } from "./enum";
 
@@ -6,8 +8,11 @@ function MainRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path={RoutesEnum.Login} element={<LoginPage />}>
+          <Route index element={<LoginPage />} />
+        </Route>
         <Route path={RoutesEnum.Home} element={<App />}>
-          <Route index /*element={<HomePage/>}*/ />
+          <Route index element={<HomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
