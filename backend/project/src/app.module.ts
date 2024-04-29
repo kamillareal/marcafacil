@@ -5,11 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/core/guard/auth.guard';
+import { LaboratoryModule } from './modules/laboratory/laboratory.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     UserModule,
+    LaboratoryModule,
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
