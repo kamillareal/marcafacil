@@ -1,9 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Reservation } from '@prisma/client';
-import { getHours, isWeekend } from 'date-fns';
 import { CreateReservationRequestDto } from 'src/modules/reservation/application/dto/create/request/create-reservation-request.dto';
 import { ReservationRepository } from 'src/modules/reservation/datasource/repository/reservation.repository';
 import { FindUserService } from 'src/modules/user/core/use-cases/find/find-user.service';
+import { IsBusinessHourValidation } from './validations/is-business-hour';
+import { IsNotPastValidation } from './validations/is-not-past';
+import { isWeekendDayValidation } from './validations/is-weekend';
 
 @Injectable()
 export class CreateReservationService {
@@ -12,32 +14,24 @@ export class CreateReservationService {
     private readonly findUserService: FindUserService,
   ) {}
 
+  validations = new IsBusinessHourValidation(new isWeekendDayValidation(new IsNotPastValidation()));
+
   public async execute(data: CreateReservationRequestDto): Promise<Reservation> {
     try {
       // await this.findUserService.execute({ enrollment: data.user_id });
-      const isWeekend = this.isWeekend(data);
-      this.isBusinessHours(data);
+      this.validations.handler(data);
+      await this.isOverlapping(data);
       return await this.reservationRepository.create(data);
     } catch (error) {
-      throw new HttpException(`message:${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(`message:${error}`, error.status ?? HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  //TODO: create a chain of validation
+  private async isOverlapping(data: CreateReservationRequestDto): Promise<void> {
+    const reservations = await this.reservationRepository.findByLabIdAndInitDate(data.laboratory_id, data.init_date);
 
-  private isWeekend(data: CreateReservationRequestDto) {
-    const { init_date, end_date } = data;
-    return isWeekend(init_date) && isWeekend(end_date);
-  }
-
-  private isBusinessHours(data: CreateReservationRequestDto) {
-    const { init_date, end_date } = data;
-
-    const initHour = getHours(init_date);
-    const endHour = getHours(init_date);
-
-    const validInit = initHour >= 8 && initHour <= 21;
-
-    const validEnd = endHour >= 9 && endHour <= 22;
+    if (reservations?.id) {
+      throw new BadRequestException('There is already a reservation on that date');
+    }
   }
 }
