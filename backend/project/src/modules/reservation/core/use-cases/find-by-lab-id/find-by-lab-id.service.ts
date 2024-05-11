@@ -3,7 +3,7 @@ import { AVAILABLE_RESERVATIONS } from 'src/modules/reservation/application/cons
 import { ReservationRepository } from 'src/modules/reservation/datasource/repository/reservation.repository';
 
 @Injectable()
-export class FindAvailableReservations {
+export class FindAvailableReservationsService {
   constructor(private reservationRepository: ReservationRepository) {}
 
   public async execute(laboratory_id: string, day: string) {

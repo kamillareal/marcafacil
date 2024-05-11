@@ -24,10 +24,14 @@ export class ReservationRepository {
   public async findByLabIdAndInitDate(laboratory_id: string, init_date: Date): Promise<Reservation> {
     return await this.prisma.reservation.findFirst({ where: { AND: [{ laboratory_id }, { init_date }] } });
   }
+
+  public async delete(id: string) {
+    return this.prisma.reservation.delete({ where: { id } });
+  }
 }
 
-const findByLabIdAndInitDate = Prisma.validator<Prisma.ReservationDefaultArgs>()({
-  select: {},
-});
+// const findByLabIdAndInitDate = Prisma.validator<Prisma.ReservationDefaultArgs>()({
+//   select: {},
+// });
 
-export type FinanceWithPerson = Prisma.ReservationGetPayload<typeof findByLabIdAndInitDate>;
+// export type FinanceWithPerson = Prisma.ReservationGetPayload<typeof findByLabIdAndInitDate>;
