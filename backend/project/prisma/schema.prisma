@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  enrollment   String        @id @unique @default(uuid())
+  enrollment   String        @id @unique
   role         Role          @default(USER)
   password     String?
   name         String

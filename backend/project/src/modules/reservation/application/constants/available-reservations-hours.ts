@@ -1,0 +1,16 @@
+export const AVAILABLE_RESERVATIONS = [
+  { inithour: 8, endHour: 9 },
+  { inithour: 9, endHour: 10 },
+  { inithour: 10, endHour: 11 },
+  { inithour: 11, endHour: 12 },
+  { inithour: 12, endHour: 13 },
+  { inithour: 13, endHour: 14 },
+  { inithour: 14, endHour: 15 },
+  { inithour: 15, endHour: 16 },
+  { inithour: 16, endHour: 17 },
+  { inithour: 17, endHour: 18 },
+  { inithour: 18, endHour: 19 },
+  { inithour: 19, endHour: 20 },
+  { inithour: 20, endHour: 21 },
+  { inithour: 21, endHour: 22 },
+];
