@@ -1,7 +1,7 @@
 import LogoFametro from "assets/icons/logo-fametro.svg";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { RoutesEnum } from "routes/enum";
+import { api, logIn } from "services/api";
 import { FlexButton } from "shared/components/Button/FlexButton";
 import { InputFormController } from "shared/components/Inputs/InputFormController";
 import { InputFormPassword } from "shared/components/Inputs/InputFormPassword";
@@ -19,11 +19,28 @@ export const LoginPage = () => {
 
   const {
     control,
+    getValues,
     formState: { isValid },
   } = useForm<LoginType>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
+
+  const handleLogIn = async () => {
+    try {
+      const { password, user } = getValues();
+
+      const response = await logIn({
+        enrollment: user,
+        password,
+      });
+
+      api.defaults.headers.common["Authorization"] =
+        `Bearer ${response.data.accessToken}`;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Container>
@@ -52,7 +69,7 @@ export const LoginPage = () => {
           width="15rem"
           text="Entrar"
           disabled={!isValid}
-          handleClick={() => navigate(RoutesEnum.Home)}
+          handleClick={() => handleLogIn()}
         />
       </Aside>
     </Container>

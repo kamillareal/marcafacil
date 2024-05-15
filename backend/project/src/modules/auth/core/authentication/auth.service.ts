@@ -26,9 +26,9 @@ export class AuthService {
         role: user.role,
       };
 
-      const access_token = await this.generateAccessToken(payload);
+      const accessToken = await this.generateAccessToken(payload);
 
-      return { access_token };
+      return { accessToken };
     } catch {
       throw new UnauthorizedException();
     }
