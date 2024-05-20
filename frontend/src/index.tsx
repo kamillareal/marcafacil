@@ -4,8 +4,11 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import { store } from "data";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import MainRoutes from "routes";
+import { SnackBar } from "shared/components/SnackBar";
 import { IndexStyles } from "styles/app-styles";
 import { globalStyle, theme } from "styles/global-styles";
 import "./global";
@@ -13,13 +16,16 @@ import "./global";
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <GlobalStyles styles={globalStyle} />
-    <Typography component={"div"}>
-      <IndexStyles>
-        <MainRoutes />
-      </IndexStyles>
-    </Typography>
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <GlobalStyles styles={globalStyle} />
+      <Typography component={"div"}>
+        <IndexStyles>
+          <SnackBar />
+          <MainRoutes />
+        </IndexStyles>
+      </Typography>
+    </ThemeProvider>
+  </Provider>
 );

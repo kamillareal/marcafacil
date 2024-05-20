@@ -3,7 +3,7 @@ import { IUserLoginRequest } from "./interfaces/request/login-user.interface";
 import { IUserLoginResponse } from "./interfaces/response/user-login-response.interface";
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:8080",
 });
 
 export const logIn = (

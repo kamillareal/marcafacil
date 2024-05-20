@@ -1,6 +1,9 @@
 import LogoFametro from "assets/icons/logo-fametro.svg";
+import { showSnackbar } from "data/snackbar/actions";
+import { setUserData } from "data/user/actions";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { RoutesEnum } from "routes/enum";
 import { api, logIn } from "services/api";
 import { FlexButton } from "shared/components/Button/FlexButton";
 import { InputFormController } from "shared/components/Inputs/InputFormController";
@@ -34,10 +37,16 @@ export const LoginPage = () => {
         enrollment: user,
         password,
       });
+      const { accessToken, ...userData } = response.data;
 
+      setUserData({ ...userData, loggedIn: true });
+      showSnackbar("Login realizado com sucesso", "success", true);
+      navigate(RoutesEnum.Laboratories);
       api.defaults.headers.common["Authorization"] =
         `Bearer ${response.data.accessToken}`;
     } catch (error) {
+      showSnackbar("Matrícula ou senha inválidos", "error", true);
+
       console.error(error);
     }
   };

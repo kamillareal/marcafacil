@@ -6,11 +6,11 @@ export const LabPageBody = styled(Box)(() => ({
 
 export const CardsContainer = styled(Box)(() => ({
   width: "100%",
-  padding: "1rem 2rem",
-  display: "flex",
-  justifyContent: "start",
-  flexWrap: "wrap",
-  gap: "1rem",
+  padding: "1rem",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(270px, 1fr))",
+  gridGap: "20px",
+  alignItems: "start",
 }));
 
 export const TitleBox = styled(Box)(() => ({

@@ -28,7 +28,7 @@ export class AuthService {
 
       const accessToken = await this.generateAccessToken(payload);
 
-      return { accessToken };
+      return { accessToken, name: user.name, role: user.role, enrollment: user.enrollment };
     } catch {
       throw new UnauthorizedException();
     }

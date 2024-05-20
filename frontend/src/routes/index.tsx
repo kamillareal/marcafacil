@@ -15,7 +15,10 @@ function MainRoutes() {
         <Route path={RoutesEnum.Home} element={<App />}>
           <Route index element={<HomePage />} />
         </Route>
-        <Route path="/laboratories" element={<LaboratoriesPage />}></Route>
+        <Route
+          path={RoutesEnum.Laboratories}
+          element={<LaboratoriesPage />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

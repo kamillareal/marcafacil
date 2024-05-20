@@ -1,3 +1,6 @@
+import { Box } from "@mui/material";
+import { IStore } from "data";
+import { useSelector } from "react-redux";
 import LabCard from "shared/components/Cards";
 import Header from "shared/components/Header";
 import { RobotoLarge, RobotoMedium } from "shared/typography/Roboto";
@@ -65,17 +68,10 @@ export const LaboratoriesPage = () => {
       description:
         "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
-    {
-      id: "aosjdfj",
-      name: "Laboratório 29",
-      capacity: 32,
-      unit: "5",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
-      description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
-    },
   ];
+  const user = useSelector((store: IStore) => store.user);
+  console.log(user);
+
   return (
     <LabPageBody>
       <Header></Header>
@@ -85,13 +81,21 @@ export const LaboratoriesPage = () => {
       </TitleBox>
       <CardsContainer>
         {cardsList.map((card) => (
-          <LabCard
-            imageUrl={card.imageUrl}
-            name={card.name}
-            capacity={card.capacity}
-            unit={card.unit}
-            description={card.description}
-          ></LabCard>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <LabCard
+              imageUrl={card.imageUrl}
+              name={card.name}
+              capacity={card.capacity}
+              unit={card.unit}
+              description={card.description}
+            ></LabCard>
+          </Box>
         ))}
       </CardsContainer>
     </LabPageBody>
