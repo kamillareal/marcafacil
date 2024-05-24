@@ -1,7 +1,8 @@
 import { App } from "App";
 import { HomePage } from "pages/Home";
-import { LaboratoriesPage } from "pages/laboratories";
 import { LoginPage } from "pages/Login";
+import { ReservationPage } from "pages/Reservation";
+import { LaboratoriesPage } from "pages/laboratories";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RoutesEnum } from "./enum";
 
@@ -15,10 +16,8 @@ function MainRoutes() {
         <Route path={RoutesEnum.Home} element={<App />}>
           <Route index element={<HomePage />} />
         </Route>
-        <Route
-          path={RoutesEnum.Laboratories}
-          element={<LaboratoriesPage />}
-        ></Route>
+        <Route path={RoutesEnum.Laboratories} element={<LaboratoriesPage />} />
+        <Route path={RoutesEnum.Reservations} element={<ReservationPage />} />
       </Routes>
     </BrowserRouter>
   );

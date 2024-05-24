@@ -12,7 +12,7 @@ export class FindAvailableReservationsService {
 
       const availableReservationsFiltered = AVAILABLE_RESERVATIONS.filter((element) => {
         const overlapping = !allDayReservations.some((e) => {
-          return e.init_date.getHours() === element.inithour;
+          return e.init_date.getHours() === element.initHour;
         });
         return overlapping;
       });

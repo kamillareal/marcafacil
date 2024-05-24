@@ -16,7 +16,7 @@ export const LaboratoriesPage = () => {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
       description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
+        "Os Laboratórios de Informática têm como principal objetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
     {
       id: "aosjdfj",
@@ -26,7 +26,7 @@ export const LaboratoriesPage = () => {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
       description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
+        "Os Laboratórios de Informática têm como principal objetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
     {
       id: "aosjdfj",
@@ -36,7 +36,7 @@ export const LaboratoriesPage = () => {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
       description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
+        "Os Laboratórios de Informática têm como principal objetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
     {
       id: "aosjdfj",
@@ -46,7 +46,7 @@ export const LaboratoriesPage = () => {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
       description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
+        "Os Laboratórios de Informática têm como principal objetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
     {
       id: "aosjdfj",
@@ -56,7 +56,7 @@ export const LaboratoriesPage = () => {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
       description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
+        "Os Laboratórios de Informática têm como principal objetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
     {
       id: "aosjdfj",
@@ -66,7 +66,7 @@ export const LaboratoriesPage = () => {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGLdxdY5oRgigMbdxN3PrUk9CIIYxQvkOt_g&s",
       description:
-        "Os Laboratórios de Informática têm como principalobjetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
+        "Os Laboratórios de Informática têm como principal objetivo atender aos acadêmicos da Instituição no desenvolvimento deTrabalhos e Pesquisas referentes as Disciplinas ministradas nos cursos regulares, além de servir como suporte didático aos professores",
     },
   ];
   const user = useSelector((store: IStore) => store.user);
