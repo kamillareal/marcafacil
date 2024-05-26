@@ -28,6 +28,13 @@ export class ReservationRepository {
   public async delete(id: string) {
     return this.prisma.reservation.delete({ where: { id } });
   }
+
+  public async findAllByDateRange(user_id: string, init_date: string, end_date: string) {
+    return this.prisma.reservation.findMany({
+      where: { user_id, AND: [{ init_date: { gte: init_date } }, { init_date: { lte: end_date } }] },
+      orderBy: { init_date: 'asc' },
+    });
+  }
 }
 
 // const findByLabIdAndInitDate = Prisma.validator<Prisma.ReservationDefaultArgs>()({
