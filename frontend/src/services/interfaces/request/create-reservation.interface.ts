@@ -1,6 +1,6 @@
 export interface ICreateReservationRequest {
-  init_date: Date;
-  end_date: Date;
+  init_date: string;
+  end_date: string;
   laboratory_id: string;
   user_id: string;
 }

@@ -6,12 +6,14 @@ export interface IUserState {
   loggedIn: boolean;
   name: string;
   role: UserRoleEnum | "";
+  enrollment: string;
 }
 
 const initialState: IUserState = {
   name: "",
   loggedIn: false,
   role: "",
+  enrollment: "",
 };
 
 export const userSlice = createSlice({

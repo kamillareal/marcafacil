@@ -40,6 +40,8 @@ model Laboratory {
   isAvailable Boolean
   number      Int
   floor       Int
+  description String?       @db.VarChar(255)
+  imageUrl    String?       @db.VarChar(255)
   created_at  DateTime      @default(now())
   updated_at  DateTime      @updatedAt
   reservation Reservation[]

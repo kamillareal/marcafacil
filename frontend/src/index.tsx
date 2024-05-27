@@ -12,6 +12,7 @@ import { SnackBar } from "shared/components/SnackBar";
 import { IndexStyles } from "styles/app-styles";
 import { globalStyle, theme } from "styles/global-styles";
 import "./global";
+import "./globalStyle.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 

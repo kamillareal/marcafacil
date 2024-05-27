@@ -4,7 +4,7 @@ import { setUserData } from "data/user/actions";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { RoutesEnum } from "routes/enum";
-import { api, logIn } from "services/api";
+import { logIn } from "services/api";
 import { FlexButton } from "shared/components/Button/FlexButton";
 import { InputFormController } from "shared/components/Inputs/InputFormController";
 import { InputFormPassword } from "shared/components/Inputs/InputFormPassword";
@@ -41,9 +41,9 @@ export const LoginPage = () => {
 
       setUserData({ ...userData, loggedIn: true });
       showSnackbar("Login realizado com sucesso", "success", true);
+      localStorage.setItem("jwt-token", response.data.accessToken);
+
       navigate(RoutesEnum.Laboratories);
-      api.defaults.headers.common["Authorization"] =
-        `Bearer ${response.data.accessToken}`;
     } catch (error) {
       showSnackbar("Matrícula ou senha inválidos", "error", true);
 

@@ -14,6 +14,7 @@ interface ICard {
   capacity: number;
   unit: string;
   description: string;
+  handleClick: any;
 }
 export default function LabCard({
   imageUrl,
@@ -21,6 +22,7 @@ export default function LabCard({
   name,
   unit,
   description,
+  handleClick,
 }: ICard) {
   return (
     <Card
@@ -30,6 +32,7 @@ export default function LabCard({
         backgroundColor: "#F0F1F2",
         borderRadius: "1rem",
       }}
+      onClick={() => handleClick?.()}
     >
       <CardActionArea>
         <CardMedia
