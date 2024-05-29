@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Laboratory, Prisma, PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class LaboratoryRepository {
   private prisma = new PrismaClient();
 
-  public create(data: Prisma.LaboratoryCreateInput) {
-    return this.prisma.laboratory.create({
+  public async create(data: Prisma.LaboratoryCreateInput) {
+    return await this.prisma.laboratory.create({
       data,
     });
+  }
+
+  public async findAll(): Promise<Laboratory[]> {
+    return await this.prisma.laboratory.findMany();
   }
 }

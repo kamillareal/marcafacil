@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { laboratoryInitialState } from "./state";
+import { ILaboratory } from "./type";
 
 export const laboratorySlice = createSlice({
   initialState: laboratoryInitialState,
@@ -8,6 +9,9 @@ export const laboratorySlice = createSlice({
     setSelectedLaboratory: (state, action: PayloadAction<string>) => {
       state.laboratorySelected.id = action.payload;
       return state;
+    },
+    setLaboratoryList: (state, action: PayloadAction<ILaboratory[]>) => {
+      state.laboratorylist = action.payload;
     },
   },
 });

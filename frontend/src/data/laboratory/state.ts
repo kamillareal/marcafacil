@@ -7,7 +7,7 @@ export const laboratoryInitialState: ILaboratoryEntity = {
   laboratorylist: [
     {
       id: "",
-      name: "",
+      number: "",
       capacity: 0,
       unit: "5",
       imageUrl: "",

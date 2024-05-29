@@ -25,6 +25,7 @@ model Reservation {
   end_date      DateTime
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
+  subject       String?  @db.VarChar(255)
 
   material_Reservation Material_Reservation[]
 
@@ -40,8 +41,8 @@ model Laboratory {
   isAvailable Boolean
   number      Int
   floor       Int
-  description String?       @db.VarChar(255)
-  imageUrl    String?       @db.VarChar(255)
+  description String?       @db.Text
+  imageUrl    String?       @db.Text
   created_at  DateTime      @default(now())
   updated_at  DateTime      @updatedAt
   reservation Reservation[]
@@ -62,7 +63,7 @@ model Material_Reservation {
 model Material {
   id                   String                 @id @unique @default(uuid())
   name                 String
-  description          String
+  description          String                 @db.Text
   category             String
   quantity             Int
   created_at           DateTime               @default(now())

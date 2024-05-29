@@ -7,7 +7,7 @@ export interface ILaboratoryEntity {
 
 export interface ILaboratory {
   id: string;
-  name: string;
+  number: string;
   capacity: number;
   unit: string;
   imageUrl: string;

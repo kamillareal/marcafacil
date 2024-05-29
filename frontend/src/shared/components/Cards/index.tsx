@@ -1,5 +1,4 @@
 import { Box, CardActionArea } from "@mui/material";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import {
@@ -7,6 +6,7 @@ import {
   RobotoBoldSmall,
   RobotoSmall,
 } from "shared/typography/Roboto";
+import { CardStyled } from "./styles";
 
 interface ICard {
   imageUrl: string;
@@ -25,15 +25,7 @@ export default function LabCard({
   handleClick,
 }: ICard) {
   return (
-    <Card
-      sx={{
-        maxWidth: 270,
-        maxHeight: 400,
-        backgroundColor: "#F0F1F2",
-        borderRadius: "1rem",
-      }}
-      onClick={() => handleClick?.()}
-    >
+    <CardStyled onClick={() => handleClick?.()}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -43,7 +35,7 @@ export default function LabCard({
         />
         <CardContent>
           <RobotoBoldMedium gutterBottom variant="h5" component="div">
-            {name}
+            Laboratório {name}
           </RobotoBoldMedium>
           <Box>
             <RobotoBoldSmall color={"text.secondary"}>Unidade:</RobotoBoldSmall>
@@ -64,6 +56,6 @@ export default function LabCard({
           </Box>
         </CardContent>
       </CardActionArea>
-    </Card>
+    </CardStyled>
   );
 }

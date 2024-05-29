@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import { ILaboratory } from "data/laboratory/type";
 import {
   ICreateReservationRequest,
   ICreateReservationResponse,
@@ -36,4 +37,8 @@ export const CreateReservation = (
   data: ICreateReservationRequest
 ): Promise<AxiosResponse<ICreateReservationResponse>> => {
   return api.post("reservation/create", data);
+};
+
+export const getAllLabs = (): Promise<AxiosResponse<ILaboratory[]>> => {
+  return api.get("laboratory/get-all");
 };
