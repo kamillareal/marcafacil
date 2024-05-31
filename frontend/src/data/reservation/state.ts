@@ -5,4 +5,5 @@ export const reservationInitialState: IReservationState = {
   end_date: new Date(),
   laboratory_id: "",
   user_id: "",
+  subject: "",
 };

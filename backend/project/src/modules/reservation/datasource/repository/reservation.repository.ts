@@ -11,7 +11,7 @@ export class ReservationRepository {
   }
 
   public async findByDayAndLabId(laboratory_id: string, day: string) {
-    const dayEnd = addHours(day, 23.999).toISOString();
+    const dayEnd = addHours(day, 28).toISOString();
     return this.prisma.reservation.findMany({
       where: {
         laboratory_id,

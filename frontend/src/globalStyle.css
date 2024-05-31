@@ -27,6 +27,14 @@
   color: #9b6467;
 }
 
+.e2e-dx-scheduler-form-start-date {
+  pointer-events: none;
+}
+
+.e2e-dx-scheduler-form-end-date {
+  pointer-events: none;
+}
+
 .dx-scheduler-header-panel-cell .disable-date {
   display: flex;
   flex-direction: column;

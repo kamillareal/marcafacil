@@ -13,9 +13,13 @@ export default class Utils {
     const day = date.getDay();
     return day === 0 || day === 6;
   }
+  static isPast(date: Date) {
+    const currentMoment = new Date();
+    return date < currentMoment;
+  }
 
   static isDisableDate(date: Date) {
-    return Utils.isHoliday(date) || Utils.isWeekend(date);
+    return Utils.isHoliday(date) || Utils.isWeekend(date) || this.isPast(date);
   }
 
   static isDinner(date: Date) {
