@@ -97,7 +97,10 @@ export default function Header() {
           </HeaderLarge>
           <HeaderOptionsContainer>
             {pages.map((page) => (
-              <RobotoMedium onClick={() => navigate(`${page.path}`)}>
+              <RobotoMedium
+                key={page.name}
+                onClick={() => navigate(`${page.path}`)}
+              >
                 {page.name}
               </RobotoMedium>
             ))}

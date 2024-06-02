@@ -5,45 +5,17 @@ import { useSelector } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 import * as api from "services/api";
 import { ICreateReservationRequest } from "services/interfaces/request/create-reservation.interface";
-import { data } from "./data";
 import DataCell from "./dataCell";
 
 const currentDate = new Date();
-const views: SchedulerTypes.ViewType[] = ["day", "week", "month"];
-
-const resourcesData = [
-  {
-    text: "Room 101",
-    id: 1,
-    color: "#bbd806",
-  },
-  {
-    text: "Room 102",
-    id: 2,
-    color: "#f34c8a",
-  },
-  {
-    text: "Room 103",
-    id: 3,
-    color: "#ae7fcc",
-  },
-  {
-    text: "Meeting room",
-    id: 4,
-    color: "#ff8817",
-  },
-  {
-    text: "Conference hall",
-    id: 5,
-    color: "#03bb92",
-  },
-];
+const views: SchedulerTypes.ViewType[] = ["day", "month"];
 
 export const Reservation = () => {
   const { enrollment } = useSelector((store: IStore) => store.user);
   const { id } = useSelector(
     (store: IStore) => store.laboratory.laboratorySelected
   );
+  const { dataSrc } = useSelector((store: IStore) => store.schedule);
 
   const onAppointmentAdding = async (
     e: SchedulerTypes.AppointmentAddingEvent
@@ -64,20 +36,17 @@ export const Reservation = () => {
       e.cancel = true;
       notify("Não é permitido agendar nos finais de semana.", "error", 2000);
     } else {
-      await api.CreateReservation(reservation);
+      try {
+        await api.CreateReservation(reservation);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
-  const onAppointmentUpdating = (e) => {
-    const dayOfWeek = e.newData.startDate.getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 6) {
-      e.cancel = true;
-      notify(
-        "Não é permitido mover compromissos para os finais de semana.",
-        "error",
-        2000
-      );
-    }
+  //this is how we gonna block other users
+  const onAppointmentRendered = (e) => {
+    e.appointmentElement.style.backgroundColor = "red";
   };
 
   const onAppointmentFormOpening = (e) => {
@@ -90,6 +59,8 @@ export const Reservation = () => {
     items[0].items[1].items[2].label.text = "Data final";
     form.option("items", items);
   };
+
+  const data = [...dataSrc];
 
   return (
     <Fragment>
@@ -107,8 +78,8 @@ export const Reservation = () => {
         cellDuration={60}
         showAllDayPanel={false}
         dataCellComponent={DataCell}
+        onAppointmentRendered={onAppointmentRendered}
         onAppointmentAdding={onAppointmentAdding}
-        onAppointmentUpdating={onAppointmentUpdating}
       >
         <Editing
           allowAdding={true}

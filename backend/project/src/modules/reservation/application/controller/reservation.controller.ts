@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateReservationService } from '../../core/use-cases/create/create-reservation.service';
 import { DeleteReservationService } from '../../core/use-cases/delete/delete-reservation.service';
-import { FindAllReservationsByUserService } from '../../core/use-cases/find-all/find-all.service';
-import { FindAvailableReservationsService } from '../../core/use-cases/find-by-lab-id/find-by-lab-id.service';
+import { FindAvailableReservationsService } from '../../core/use-cases/find-all-availabel-by-lab-id/find-by-lab-id.service';
+import { FindAllReservationsByUserAndLabService } from '../../core/use-cases/find-all-by-user-and-lab/find-all.service';
 
 @Controller('reservation')
 export class ReservationController {
@@ -10,7 +10,7 @@ export class ReservationController {
     private createReservationService: CreateReservationService,
     private findAvailableReservationsService: FindAvailableReservationsService,
     private deleteReservationService: DeleteReservationService,
-    private findAllReservationsByUserService: FindAllReservationsByUserService,
+    private findAllReservationsByUserService: FindAllReservationsByUserAndLabService,
   ) {}
 
   @Post('create')
@@ -29,7 +29,7 @@ export class ReservationController {
   }
 
   @Get('find-by-range/:userId')
-  public async findAllByDateRange(@Param('userId') userId: string, @Query('initDate') initDate: string, @Query('endDate') endDate: string) {
-    return await this.findAllReservationsByUserService.execute(userId, initDate, endDate);
+  public async findAllByDateRange(@Param('userId') userId: string, @Query('laboratoryId') laboratoryId: string) {
+    return await this.findAllReservationsByUserService.execute(userId, laboratoryId);
   }
 }

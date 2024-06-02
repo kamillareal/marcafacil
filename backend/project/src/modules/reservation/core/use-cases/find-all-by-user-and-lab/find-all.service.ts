@@ -2,12 +2,12 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { ReservationRepository } from 'src/modules/reservation/datasource/repository/reservation.repository';
 
 @Injectable()
-export class FindAllReservationsByUserService {
+export class FindAllReservationsByUserAndLabService {
   constructor(private reservationsRepository: ReservationRepository) {}
 
-  async execute(userId: string, initDate: string, endDate: string) {
+  async execute(userId: string, laboratoryId) {
     try {
-      return await this.reservationsRepository.findAllByDateRange(userId, initDate, endDate);
+      return await this.reservationsRepository.findAllByUserAndLab(userId, laboratoryId);
     } catch (error) {
       throw new BadRequestException();
     }

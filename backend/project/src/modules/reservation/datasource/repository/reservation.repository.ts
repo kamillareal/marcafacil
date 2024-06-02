@@ -29,9 +29,9 @@ export class ReservationRepository {
     return this.prisma.reservation.delete({ where: { id } });
   }
 
-  public async findAllByDateRange(user_id: string, init_date: string, end_date: string) {
+  public async findAllByUserAndLab(user_id: string, laboratory_id: string) {
     return this.prisma.reservation.findMany({
-      where: { user_id, AND: [{ init_date: { gte: init_date } }, { init_date: { lte: end_date } }] },
+      where: { user_id, laboratory_id },
       orderBy: { init_date: 'asc' },
     });
   }

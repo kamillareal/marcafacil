@@ -4,6 +4,10 @@ import {
   ICreateReservationRequest,
   ICreateReservationResponse,
 } from "./interfaces/request/create-reservation.interface";
+import {
+  IGetUserReservationsRequest,
+  IGetUserReservationsResponse,
+} from "./interfaces/request/get-reservations";
 
 import { IUserLoginRequest } from "./interfaces/request/login-user.interface";
 import { IUserLoginResponse } from "./interfaces/response/user-login-response.interface";
@@ -41,4 +45,12 @@ export const CreateReservation = (
 
 export const getAllLabs = (): Promise<AxiosResponse<ILaboratory[]>> => {
   return api.get("laboratory/get-all");
+};
+
+export const getUserReservationsByRange = (
+  data: IGetUserReservationsRequest
+): Promise<AxiosResponse<IGetUserReservationsResponse[]>> => {
+  return api.get(
+    `/reservation/find-by-range/${data.enrollment}?laboratoryId=${data.laboratoryId}`
+  );
 };
