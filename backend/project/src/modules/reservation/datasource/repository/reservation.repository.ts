@@ -35,6 +35,14 @@ export class ReservationRepository {
       orderBy: { init_date: 'asc' },
     });
   }
+
+  public async findAllReservationsAside(user_id: string, laboratory_id: string) {
+    return this.prisma.reservation.findMany({
+      where: { NOT: { user_id }, laboratory_id },
+      orderBy: { init_date: 'asc' },
+      select: { init_date: true, end_date: true },
+    });
+  }
 }
 
 // const findByLabIdAndInitDate = Prisma.validator<Prisma.ReservationDefaultArgs>()({

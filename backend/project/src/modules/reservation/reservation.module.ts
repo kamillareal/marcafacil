@@ -5,6 +5,7 @@ import { CreateReservationService } from './core/use-cases/create/create-reserva
 import { DeleteReservationService } from './core/use-cases/delete/delete-reservation.service';
 import { FindAvailableReservationsService } from './core/use-cases/find-all-availabel-by-lab-id/find-by-lab-id.service';
 import { FindAllReservationsByUserAndLabService } from './core/use-cases/find-all-by-user-and-lab/find-all.service';
+import { FindAllReservationsAside } from './core/use-cases/find-all-reservations-aside/find-all-reservations-aside.service';
 import { ReservationRepository } from './datasource/repository/reservation.repository';
 
 @Module({
@@ -16,6 +17,7 @@ import { ReservationRepository } from './datasource/repository/reservation.repos
     FindAvailableReservationsService,
     DeleteReservationService,
     FindAllReservationsByUserAndLabService,
+    FindAllReservationsAside,
   ],
 })
 export class ReservationModule {}

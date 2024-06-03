@@ -6,6 +6,7 @@ import { Fragment } from "react/jsx-runtime";
 import * as api from "services/api";
 import { ICreateReservationRequest } from "services/interfaces/request/create-reservation.interface";
 import DataCell from "./dataCell";
+import Utils from "./utils";
 
 const currentDate = new Date();
 const views: SchedulerTypes.ViewType[] = ["day", "month"];
@@ -30,9 +31,8 @@ export const Reservation = () => {
       end_date: endDate,
       subject: e.appointmentData.text!,
     };
-    const dayOfWeek = new Date(e.appointmentData.startDate!).getDay();
 
-    if (dayOfWeek === 0 || dayOfWeek === 6) {
+    if (Utils.isDisableDate(new Date(e.appointmentData.startDate!))) {
       e.cancel = true;
       notify("Não é permitido agendar nos finais de semana.", "error", 2000);
     } else {
@@ -46,7 +46,9 @@ export const Reservation = () => {
 
   //this is how we gonna block other users
   const onAppointmentRendered = (e) => {
-    e.appointmentElement.style.backgroundColor = "red";
+    if (e.appointmentData.text === "Reservado") {
+      e.appointmentElement.style.backgroundColor = "red";
+    }
   };
 
   const onAppointmentFormOpening = (e) => {

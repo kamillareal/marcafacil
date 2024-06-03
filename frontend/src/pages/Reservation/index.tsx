@@ -2,7 +2,10 @@ import { IStore } from "data";
 import { setDataSrc } from "data/schedule/actions";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getUserReservationsByRange } from "services/api";
+import {
+  getUserAsideReservations,
+  getUserReservationsByRange,
+} from "services/api";
 import Header from "shared/components/Header";
 
 import { Reservation } from "shared/components/Reservation";
@@ -21,6 +24,10 @@ export const ReservationPage = () => {
         enrollment,
         laboratoryId: laboratorySelected.id,
       });
+      const unavailableReservations = await getUserAsideReservations({
+        enrollment,
+        laboratoryId: laboratorySelected.id,
+      });
       const dataSrcFormated = response.data.map((element) => {
         return {
           text: element.subject,
@@ -28,7 +35,12 @@ export const ReservationPage = () => {
           endDate: element.end_date,
         };
       });
-      setDataSrc(dataSrcFormated);
+
+      const allReservations = [
+        ...dataSrcFormated,
+        ...unavailableReservations.data,
+      ];
+      setDataSrc(allReservations);
     } catch (error) {
       console.error(error);
     }

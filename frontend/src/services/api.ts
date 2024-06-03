@@ -7,6 +7,7 @@ import {
 import {
   IGetUserReservationsRequest,
   IGetUserReservationsResponse,
+  IGetUserUnavailabelReservationsResponse,
 } from "./interfaces/request/get-reservations";
 
 import { IUserLoginRequest } from "./interfaces/request/login-user.interface";
@@ -52,5 +53,13 @@ export const getUserReservationsByRange = (
 ): Promise<AxiosResponse<IGetUserReservationsResponse[]>> => {
   return api.get(
     `/reservation/find-by-range/${data.enrollment}?laboratoryId=${data.laboratoryId}`
+  );
+};
+
+export const getUserAsideReservations = (
+  data: IGetUserReservationsRequest
+): Promise<AxiosResponse<IGetUserUnavailabelReservationsResponse[]>> => {
+  return api.get(
+    `/reservation/find-all-aside/${data.enrollment}?laboratoryId=${data.laboratoryId}`
   );
 };
