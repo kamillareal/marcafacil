@@ -1,13 +1,9 @@
 import { IStore } from "data";
-import { setDataSrc } from "data/schedule/actions";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {
-  getUserAsideReservations,
-  getUserReservationsByRange,
-} from "services/api";
 import Header from "shared/components/Header";
 
+import { updateDataSrc } from "shared/common";
 import { Reservation } from "shared/components/Reservation";
 import { ReservationPageBody } from "./styles";
 
@@ -19,31 +15,7 @@ export const ReservationPage = () => {
   );
 
   const getUserReservationsByCurrentMonth = useCallback(async () => {
-    try {
-      const response = await getUserReservationsByRange({
-        enrollment,
-        laboratoryId: laboratorySelected.id,
-      });
-      const unavailableReservations = await getUserAsideReservations({
-        enrollment,
-        laboratoryId: laboratorySelected.id,
-      });
-      const dataSrcFormated = response.data.map((element) => {
-        return {
-          text: element.subject,
-          startDate: element.init_date,
-          endDate: element.end_date,
-        };
-      });
-
-      const allReservations = [
-        ...dataSrcFormated,
-        ...unavailableReservations.data,
-      ];
-      setDataSrc(allReservations);
-    } catch (error) {
-      console.error(error);
-    }
+    updateDataSrc(enrollment, laboratorySelected.id);
   }, [currentView]);
   useEffect(() => {
     getUserReservationsByCurrentMonth();

@@ -38,10 +38,14 @@ export const logIn = (
   return api.post("/auth/user-signIn", { enrollment, password });
 };
 
-export const CreateReservation = (
+export const CreateReservation = async (
   data: ICreateReservationRequest
-): Promise<AxiosResponse<ICreateReservationResponse>> => {
-  return api.post("reservation/create", data);
+): Promise<ICreateReservationResponse> => {
+  const response = await api.post<ICreateReservationResponse>(
+    "reservation/create",
+    data
+  );
+  return response.data;
 };
 
 export const getAllLabs = (): Promise<AxiosResponse<ILaboratory[]>> => {
@@ -62,4 +66,10 @@ export const getUserAsideReservations = (
   return api.get(
     `/reservation/find-all-aside/${data.enrollment}?laboratoryId=${data.laboratoryId}`
   );
+};
+
+export const deleteReservation = (
+  reservationId: string
+): Promise<AxiosResponse<void>> => {
+  return api.delete(`/reservation/delete/${reservationId}`);
 };

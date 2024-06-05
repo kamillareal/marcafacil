@@ -2,9 +2,9 @@ import { IStore } from "data";
 import Scheduler, { Editing, SchedulerTypes } from "devextreme-react/scheduler";
 import notify from "devextreme/ui/notify";
 import { useSelector } from "react-redux";
-import { Fragment } from "react/jsx-runtime";
 import * as api from "services/api";
 import { ICreateReservationRequest } from "services/interfaces/request/create-reservation.interface";
+import { updateDataSrc } from "shared/common";
 import DataCell from "./dataCell";
 import Utils from "./utils";
 
@@ -17,6 +17,9 @@ export const Reservation = () => {
     (store: IStore) => store.laboratory.laboratorySelected
   );
   const { dataSrc } = useSelector((store: IStore) => store.schedule);
+  const { laboratorySelected } = useSelector(
+    (store: IStore) => store.laboratory
+  );
 
   const onAppointmentAdding = async (
     e: SchedulerTypes.AppointmentAddingEvent
@@ -38,6 +41,7 @@ export const Reservation = () => {
     } else {
       try {
         await api.CreateReservation(reservation);
+        await updateDataSrc(enrollment, laboratorySelected.id);
       } catch (error) {
         console.error(error);
       }
@@ -48,10 +52,30 @@ export const Reservation = () => {
   const onAppointmentRendered = (e) => {
     if (e.appointmentData.text === "Reservado") {
       e.appointmentElement.style.backgroundColor = "red";
+      e.appointmentElement.style.pointerEvents = "none";
+      e.allowDeleting = false;
     }
   };
 
-  const onAppointmentFormOpening = (e) => {
+  const handleDeleteAppointment = async (
+    e: SchedulerTypes.AppointmentDeletedEvent
+  ) => {
+    try {
+      const reservationId = e.appointmentData.id;
+      console.log(reservationId);
+      if (reservationId) {
+        await api.deleteReservation(reservationId);
+        notify("Agendamento excluído com sucesso.", "success", 200);
+      } else {
+        notify("Não foi possível identificar a reserva a ser excluída.");
+      }
+    } catch (error) {
+      console.error("Erro ao excluir agendamento:", error);
+      notify("Erro ao excluir agendamento. Por favor, tente novamente.");
+    }
+  };
+
+  const onAppointmentFormOpening = (e: any) => {
     const { form } = e;
     const items = form.option("items");
     items[0].items[0].label.text = "Título";
@@ -65,32 +89,31 @@ export const Reservation = () => {
   const data = [...dataSrc];
 
   return (
-    <Fragment>
-      <Scheduler
-        timeZone="America/Manaus"
-        dataSource={data}
-        views={views}
-        onAppointmentFormOpening={onAppointmentFormOpening}
-        defaultCurrentView="day"
-        defaultCurrentDate={currentDate}
-        height={"100%"}
-        startDayHour={8}
-        min={currentDate}
-        endDayHour={22}
-        cellDuration={60}
-        showAllDayPanel={false}
-        dataCellComponent={DataCell}
-        onAppointmentRendered={onAppointmentRendered}
-        onAppointmentAdding={onAppointmentAdding}
-      >
-        <Editing
-          allowAdding={true}
-          allowDeleting={true}
-          allowResizing={true}
-          allowDragging={false}
-          allowUpdating={false}
-        />
-      </Scheduler>
-    </Fragment>
+    <Scheduler
+      timeZone="America/Manaus"
+      dataSource={data}
+      views={views}
+      onAppointmentFormOpening={onAppointmentFormOpening}
+      onAppointmentDeleted={handleDeleteAppointment}
+      defaultCurrentView="day"
+      defaultCurrentDate={currentDate}
+      height={"100%"}
+      startDayHour={8}
+      min={currentDate}
+      endDayHour={22}
+      cellDuration={60}
+      showAllDayPanel={false}
+      dataCellComponent={DataCell}
+      onAppointmentRendered={onAppointmentRendered}
+      onAppointmentAdding={onAppointmentAdding}
+    >
+      <Editing
+        allowAdding={true}
+        allowDeleting={true}
+        allowResizing={true}
+        allowDragging={false}
+        allowUpdating={false}
+      />
+    </Scheduler>
   );
 };

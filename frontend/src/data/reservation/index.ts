@@ -1,28 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { reservationInitialState } from "./state";
+import { CreateReservation } from "./types";
 
 export const reservationSlice = createSlice({
   name: "reservation",
   initialState: reservationInitialState,
   reducers: {
-    setInitDate: (state, action: PayloadAction<Date>) => {
-      state.init_date = action.payload;
-      return state;
+    addReservation: (state, action: PayloadAction<CreateReservation>) => {
+      state.createReservations.push(action.payload);
     },
-
-    setEndDate: (state, action: PayloadAction<Date>) => {
-      state.end_date = action.payload;
-      return state;
-    },
-
-    setLabId: (state, action: PayloadAction<string>) => {
-      state.laboratory_id = action.payload;
-      return state;
-    },
-
-    setUserId: (state, action: PayloadAction<string>) => {
-      state.user_id = action.payload;
-      return state;
+    setReservationId: (state, action: PayloadAction<string>) => {
+      state.id = action.payload;
     },
   },
 });
+
+export const { addReservation, setReservationId } = reservationSlice.actions;
+
+export default reservationSlice.reducer;

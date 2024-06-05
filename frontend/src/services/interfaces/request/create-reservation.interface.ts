@@ -7,5 +7,10 @@ export interface ICreateReservationRequest {
 }
 
 export interface ICreateReservationResponse {
-  reservationId: string;
+  init_date: string;
+  end_date: string;
+  laboratory_id: string;
+  user_id: string;
+  id: string;
+  subject?: string;
 }

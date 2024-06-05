@@ -5,8 +5,11 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { showSnackbar } from "data/snackbar/actions";
+import { setUserData } from "data/user/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RoutesEnum } from "routes/enum";
 import { HeaderLarge } from "shared/typography/HeaderLarge";
 import {
   RobotoBoldMedium,
@@ -45,6 +48,18 @@ export default function Header() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt-token");
+    setUserData({
+      loggedIn: false,
+      name: "",
+      role: "",
+      enrollment: "",
+    });
+    showSnackbar("Logout realizado com sucesso", "success", true);
+    navigate(RoutesEnum.Login);
   };
 
   return (
@@ -141,7 +156,12 @@ export default function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={
+                    setting === "Logout" ? handleLogout : handleCloseUserMenu
+                  }
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

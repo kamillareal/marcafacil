@@ -1,18 +1,11 @@
 import { store } from "data";
 import { reservationSlice } from ".";
+import { CreateReservation } from "./types";
 
-export const setInitDate = (payload: Date) => {
-  store.dispatch(reservationSlice.actions.setInitDate(payload));
+export const SetReservation = (payload: CreateReservation) => {
+  store.dispatch(reservationSlice.actions.addReservation(payload));
 };
 
-export const setEndDate = (payload: Date) => {
-  store.dispatch(reservationSlice.actions.setEndDate(payload));
-};
-
-export const setLabId = (payload: string) => {
-  store.dispatch(reservationSlice.actions.setLabId(payload));
-};
-
-export const setUserId = (payload: string) => {
-  store.dispatch(reservationSlice.actions.setUserId(payload));
+export const SetReservationId = (payload: string) => {
+  store.dispatch(reservationSlice.actions.setReservationId(payload));
 };
