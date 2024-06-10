@@ -1,6 +1,8 @@
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { Box } from "@mui/material";
 import { IStore } from "data";
 import {
+  openCreateLabModal,
   setLaboratoryList,
   setSelectedLaboratory,
 } from "data/laboratory/action";
@@ -11,11 +13,13 @@ import { RoutesEnum } from "routes/enum";
 import { getAllLabs } from "services/api";
 import LabCard from "shared/components/Cards";
 import Header from "shared/components/Header";
+import { UserRoleEnum } from "shared/enums/user-role.enum";
 import { RobotoLarge, RobotoMedium } from "shared/typography/Roboto";
 import { CardsContainer, LabPageBody, TitleBox } from "./styles";
 
 export const LaboratoriesPage = () => {
   const { laboratorylist } = useSelector((store: IStore) => store.laboratory);
+  const { role } = useSelector((store: IStore) => store.user);
 
   const navigate = useNavigate();
 
@@ -41,7 +45,22 @@ export const LaboratoriesPage = () => {
     <LabPageBody>
       <Header></Header>
       <TitleBox>
-        <RobotoLarge>Laboratórios</RobotoLarge>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}
+        >
+          <RobotoLarge>Laboratórios</RobotoLarge>
+          {role === UserRoleEnum.Admin ? (
+            <AddCircleRoundedIcon
+              onClick={openCreateLabModal}
+              sx={{ fontSize: "50px", color: "#1F3F5E", cursor: "pointer" }}
+            />
+          ) : null}
+        </Box>
+
         <RobotoMedium>Selecione um laboratório para fazer reserva</RobotoMedium>
       </TitleBox>
       <CardsContainer>
@@ -56,8 +75,9 @@ export const LaboratoriesPage = () => {
             <LabCard
               handleClick={() => handleClick(card.id)}
               key={card.id}
+              imageData={card.imageData}
               imageUrl={card.imageUrl}
-              name={card.number}
+              name={card.name}
               capacity={card.capacity}
               unit={card.unit}
               description={card.description}

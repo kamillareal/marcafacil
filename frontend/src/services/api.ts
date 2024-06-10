@@ -73,3 +73,7 @@ export const deleteReservation = (
 ): Promise<AxiosResponse<void>> => {
   return api.delete(`/reservation/delete/${reservationId}`);
 };
+
+export const createLab = (data): Promise<AxiosResponse<void>> => {
+  return api.post(`/laboratory/create`, data);
+};

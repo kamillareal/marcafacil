@@ -7,11 +7,11 @@ export class LaboratoryRepository {
 
   public async create(data: Prisma.LaboratoryCreateInput) {
     return await this.prisma.laboratory.create({
-      data,
+      data: { ...data },
     });
   }
 
   public async findAll(): Promise<Laboratory[]> {
-    return await this.prisma.laboratory.findMany();
+    return await this.prisma.laboratory.findMany({ orderBy: { name: 'asc' } });
   }
 }

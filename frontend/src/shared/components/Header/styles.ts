@@ -5,9 +5,16 @@ export const HeaderOptionsContainer = styled("div")(({ theme }) => ({
   maxWidth: "529px",
   display: "flex",
   gap: "2rem",
+  height: "100%",
 
   span: {
     cursor: "pointer",
+    padding: "0.3rem",
+  },
+
+  "span:hover": {
+    borderRadius: "0.3rem",
+    backgroundColor: "rgba(255,255,255,0.1)",
   },
 
   [theme.breakpoints.down("md")]: {

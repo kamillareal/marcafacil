@@ -4,6 +4,9 @@ export const laboratoryInitialState: ILaboratoryEntity = {
   laboratorySelected: {
     id: "",
   },
+  createLabModal: {
+    open: false,
+  },
   laboratorylist: [
     {
       id: "",
@@ -11,7 +14,9 @@ export const laboratoryInitialState: ILaboratoryEntity = {
       capacity: 0,
       unit: "5",
       imageUrl: "",
+      imageData: "",
       description: "",
+      name: "",
     },
   ],
 };

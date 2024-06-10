@@ -10,14 +10,29 @@ import { CardStyled } from "./styles";
 
 interface ICard {
   imageUrl: string;
+  imageData?: string;
   name: string;
   capacity: number;
   unit: string;
   description: string;
   handleClick: any;
 }
+
+function getImageUrl(imageData) {
+  if (!imageData) return null;
+  const byteCharacters = atob(imageData);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+
+  const blob = new Blob([byteArray], { type: "image/jpeg" });
+  return URL.createObjectURL(blob);
+}
 export default function LabCard({
   imageUrl,
+  imageData,
   capacity,
   name,
   unit,
@@ -30,12 +45,12 @@ export default function LabCard({
         <CardMedia
           component="img"
           height="140"
-          image={imageUrl}
-          alt="green iguana"
+          image={imageData ?? imageUrl}
+          alt="Imagem"
         />
         <CardContent>
           <RobotoBoldMedium gutterBottom variant="h5" component="div">
-            Laboratório {name}
+            {name}
           </RobotoBoldMedium>
           <Box>
             <RobotoBoldSmall color={"text.secondary"}>Unidade:</RobotoBoldSmall>

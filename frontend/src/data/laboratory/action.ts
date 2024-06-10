@@ -9,3 +9,10 @@ export const setSelectedLaboratory = (id: string) => {
 export const setLaboratoryList = (data: ILaboratory[]) => {
   store.dispatch(laboratorySlice.actions.setLaboratoryList(data));
 };
+
+export const openCreateLabModal = () => {
+  store.dispatch(laboratorySlice.actions.openCreateLabModal());
+};
+export const hideCreateLabModal = () => {
+  store.dispatch(laboratorySlice.actions.hideCreateLabModal());
+};

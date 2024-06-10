@@ -5,11 +5,14 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { IStore } from "data";
 import { showSnackbar } from "data/snackbar/actions";
 import { setUserData } from "data/user/actions";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RoutesEnum } from "routes/enum";
+import { UserRoleEnum } from "shared/enums/user-role.enum";
 import { HeaderLarge } from "shared/typography/HeaderLarge";
 import {
   RobotoBoldMedium,
@@ -24,7 +27,7 @@ import {
   ToolBarStyled,
 } from "./styles";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Perfil", "Logout"];
 const pages = [
   { name: "Laboratórios", path: "/laboratories" },
   { name: "Meus agendamentos", path: "/reservations" },
@@ -34,6 +37,7 @@ export default function Header() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
+  const { name, role } = useSelector((store: IStore) => store.user);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -61,6 +65,8 @@ export default function Header() {
     showSnackbar("Logout realizado com sucesso", "success", true);
     navigate(RoutesEnum.Login);
   };
+
+  const roleFormated = role === UserRoleEnum.Admin ? "Admin" : "Colaborador";
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -130,8 +136,8 @@ export default function Header() {
                   />
                 </IconButton>
                 <ProfileBoxStyled>
-                  <RobotoBoldMedium>Arthur barata</RobotoBoldMedium>
-                  <RobotoSmall>Professor</RobotoSmall>
+                  <RobotoBoldMedium>{name}</RobotoBoldMedium>
+                  <RobotoSmall>{roleFormated}</RobotoSmall>
                 </ProfileBoxStyled>
                 <Box onClick={handleOpenUserMenu} sx={{ cursor: "pointer" }}>
                   <ExpandMoreIcon></ExpandMoreIcon>

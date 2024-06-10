@@ -12,6 +12,15 @@ export const laboratorySlice = createSlice({
     },
     setLaboratoryList: (state, action: PayloadAction<ILaboratory[]>) => {
       state.laboratorylist = action.payload;
+      return state;
+    },
+    openCreateLabModal: (state) => {
+      state.createLabModal.open = true;
+      return state;
+    },
+    hideCreateLabModal: (state) => {
+      state.createLabModal.open = false;
+      return state;
     },
   },
 });

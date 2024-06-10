@@ -5,4 +5,6 @@ export class CreateLaboratoryRequestDto {
   isAvailable: boolean;
   number: number;
   floor: number;
+  imageData: string;
+  description: string;
 }

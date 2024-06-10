@@ -37,7 +37,7 @@ export const Reservation = () => {
 
     if (Utils.isDisableDate(new Date(e.appointmentData.startDate!))) {
       e.cancel = true;
-      notify("Não é permitido agendar nos finais de semana.", "error", 2000);
+      notify("Não é permitido agendar nos finais de semana.", "error", 3000);
     } else {
       try {
         await api.CreateReservation(reservation);
@@ -48,7 +48,6 @@ export const Reservation = () => {
     }
   };
 
-  //this is how we gonna block other users
   const onAppointmentRendered = (e) => {
     if (e.appointmentData.text === "Reservado") {
       e.appointmentElement.style.backgroundColor = "red";
@@ -62,16 +61,24 @@ export const Reservation = () => {
   ) => {
     try {
       const reservationId = e.appointmentData.id;
-      console.log(reservationId);
+
       if (reservationId) {
         await api.deleteReservation(reservationId);
-        notify("Agendamento excluído com sucesso.", "success", 200);
+        notify("Agendamento excluído com sucesso.", "success", 3000);
       } else {
-        notify("Não foi possível identificar a reserva a ser excluída.");
+        notify(
+          "Não foi possível identificar a reserva a ser excluída.",
+          "error",
+          3000
+        );
       }
     } catch (error) {
       console.error("Erro ao excluir agendamento:", error);
-      notify("Erro ao excluir agendamento. Por favor, tente novamente.");
+      notify(
+        "Erro ao excluir agendamento. Por favor, tente novamente.",
+        "error",
+        3000
+      );
     }
   };
 

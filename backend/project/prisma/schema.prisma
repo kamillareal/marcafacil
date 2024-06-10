@@ -35,13 +35,15 @@ model Reservation {
 
 model Laboratory {
   id          String        @id @unique @default(uuid())
+  name        String?       @db.VarChar(255)
   capacity    Int
   unit        Int
   machines    Int
-  isAvailable Boolean
+  isAvailable Boolean       @default(true)
   number      Int
   floor       Int
   description String?       @db.Text
+  imageData   String?       @db.LongText
   imageUrl    String?       @db.Text
   created_at  DateTime      @default(now())
   updated_at  DateTime      @updatedAt
